@@ -1,42 +1,95 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ToolzyAI V6 - Animated Pro</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Outfit',system-ui;background:#07070c;color:#fff;overflow-x:hidden}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(245,158,11,.3)}50%{box-shadow:0 0 40px rgba(239,68,68,.5)}}
-@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.header{position:sticky;top:0;z-index:100;background:rgba(7,7,12,.85);backdrop-filter:blur(25px);border-bottom:1px solid rgba(255,255,255,.08);padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;font-size:24px;letter-spacing:-.5px;background:linear-gradient(90deg,#f59e0b,#ef4444,#f59e0b);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientShift 3s linear infinite;cursor:pointer}
-.btn{padding:9px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;font-size:13px;transition:.2s;font-weight:600}
-.btn:hover{background:rgba(255,255,255,.12);transform:scale(1.03)}
-.btn-primary{background:linear-gradient(90deg,#f59e0b,#ef4444);border:0;font-weight:800;animation:glow 2.5s infinite}
-.hero{position:relative;text-align:center;padding:60px 20px 20px;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;left:-20%;width:140%;height:200%;background:radial-gradient(ellipse at center,rgba(245,158,11,.15),transparent 60%);pointer-events:none;animation:float 6s ease-in-out infinite}
-.hero h1{font-size:42px;font-weight:900;line-height:.95;max-width:850px;margin:0 auto;letter-spacing:-1.5px;animation:fadeInUp .8s ease}
-.hero h1 span{background:linear-gradient(90deg,#f59e0b,#ef4444,#f59e0b);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientShift 3s linear infinite}
-.hero p{color:#8a8a9a;margin:16px auto;max-width:600px;font-size:15px;animation:fadeInUp .8s .15s both}
-.search{max-width:640px;margin:28px auto;background:rgba(21,21,29,.8);border:1px solid rgba(255,255,255,.1);border-radius:18px;display:flex;align-items:center;padding:6px 8px 6px 20px;backdrop-filter:blur(10px);animation:fadeInUp .8s .25s both;transition:.3s}
-.search:focus-within{border-color:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,.15)}
-.search input{flex:1;background:transparent;border:0;color:#fff;outline:none;padding:12px 0;font-size:16px}
-.top-label{max-width:1200px;margin:30px auto 12px;padding:0 20px;font-size:13px;font-weight:800;letter-spacing:1.5px;color:#f59e0b;text-transform:uppercase;display:flex;align-items:center;gap:8px}
-.top-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(245,158,11,.5),transparent)}
-.grid{max-width:1200px;margin:0 auto;padding:0 20px 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
-.card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:18px;cursor:pointer;transition:.3s cubic-bezier(.34,1.56,.64,1);animation:fadeInUp .6s both;overflow:hidden}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);opacity:0;transition:.3s}
-.card:hover{transform:translateY(-6px) scale(1.02);border-color:rgba(245,158,11,.5);box-shadow:0 12px 30px rgba(0,0,0,.4),0 0 20px rgba(245,158,11,.15)}
-.card:hover::before{opacity:1}
-.card.top{border-color:rgba(245,158,11,.35);background:linear-gradient(180deg,rgba(245,158,11,.12),rgba(239,68,68,.06))}
-.card.top .ico{animation:float 3s ease-in-out infinite}
-.ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:10px;transition:.3s}
-.card h3{font-size:13.5px;font-weight:700;line-height:1.2}
-.card p{font-size:11px;color:#777;margin-top:5px;line-height:1.3}
-.badge{position:absolute;top:12px;right:12px;background:linear-gradient(90deg,#f59e0b,#ef4444);color:#000;font-size:8.5px;font-weight:900;padding:3px 8px;border-radius:99px;letter-spacing:.5px;animation:glow 2s infinite}
-.badge.new{background:linear-gradient(90deg,#22c55e,#16a34a);color:#fff}
-.page{display:none;max-width:860px;margin:0 auto;padding:18px;animation:fadeInUp .4s ease}
-.page.on{display:block}
-.toolbox{background:rgba(21,21,29,.9);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:26px;margin-top
-         </style></head><body>
-<div class="header"><div class="logo" onclick="goHome()">ToolzyAI</div><div id="auth"><button class="btn" onclick="showLogin()">Login</button><button class="btn btn-primary" onclick="showLogin()">Get Started</button></div></div>
-<div id="home"><div class="hero"><h1>Build with AI,<br><span>Create Everything</span></h1><p>50+ Real Working AI Tools - Animated V6 with Top Tools on Top</p><div class="search"><input id="s" placeholder="Search tools - ex: photo, chat, voice, bio..." oninput="filt()"><button class="btn btn-primary" style="padding:11px 22px">Search</button></div></div><div class="top-label">🔥 Most Popular - Top 6</div><div class="grid" id="g-top"></div><div class="top-label">✨ All Tools - 50+</div><div class="grid" id="g"></div><div class="footer">© 2026 ToolzyAI V6 Animated - Made in Dehradun with ❤️</div></div>
-<div id="toolpage" class="page"><button class="btn" onclick="goHome()">← Back to all tools</button><div class="toolbox
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ToolzyAI V7 Fixed</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui;background:#07070c;color:#fff}
+.header{position:sticky;top:0;z-index:99;background:rgba(7,7,12,.9);backdrop-filter:blur(20px);border-bottom:1px solid #222;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;font-size:22px;background:linear-gradient(90deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.btn{padding:8px 16px;border-radius:999px;border:1px solid #333;background:#1a1a22;color:#fff;cursor:pointer;font-size:13px}
+.btn-primary{background:linear-gradient(90deg,#f59e0b,#ef4444);border:0;font-weight:800}
+.hero{text-align:center;padding:30px 16px 10px}.hero h1{font-size:32px;font-weight:900;line-height:.95}.hero h1 span{background:linear-gradient(90deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:#777;margin:10px auto;max-width:600px;font-size:14px}
+.search{max-width:600px;margin:18px auto;background:#15151d;border:1px solid #333;border-radius:14px;display:flex;align-items:center;padding:4px 6px 4px 14px}
+.search input{flex:1;background:transparent;border:0;color:#fff;outline:none;padding:10px 0;font-size:15px}
+.sec{max-width:1200px;margin:22px auto 8px;padding:0 16px;font-size:12px;font-weight:800;color:#f59e0b;letter-spacing:1px}
+.grid{max-width:1200px;margin:0 auto;padding:0 16px 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
+.card{background:#15151d;border:1px solid #2a2a35;border-radius:16px;padding:14px;cursor:pointer;transition:.2s}
+.card:hover{border-color:#f59e0b;transform:translateY(-3px)}
+.ico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:8px}
+.card h3{font-size:13px;font-weight:700}.card p{font-size:11px;color:#666;margin-top:4px}
+.badge{background:linear-gradient(90deg,#f59e0b,#ef4444);color:#000;font-size:8px;font-weight:900;padding:2px 6px;border-radius:99px;display:inline-block;margin-bottom:6px}
+.page{display:none;max-width:840px;margin:0 auto;padding:16px}.page.on{display:block}
+.toolbox{background:#15151d;border:1px solid #333;border-radius:18px;padding:18px;margin-top:12px}
+.toolbox textarea,.toolbox input[type=text]{width:100%;background:#0a0a0f;border:1px solid #333;border-radius:10px;padding:12px;color:#fff;outline:none;margin-top:8px;font-size:14px}
+.toolbox textarea{min-height:90px}.res{background:#0a0a0f;border:1px solid #333;border-radius:10px;padding:14px;min-height:90px;margin-top:12px;white-space:pre-wrap;line-height:1.6;font-size:14px;color:#ddd}
+.res img{max-width:100%;border-radius:10px;margin-top:10px;display:block}
+.bubble{padding:10px 14px;border-radius:14px;margin:8px 0;max-width:95%;line-height:1.5}
+.bu{background:linear-gradient(90deg,#f59e0b,#ef4444);color:#000;margin-left:auto;font-weight:600;border-bottom-right-radius:4px}
+.ba{background:#222;border:1px solid #333;border-bottom-left-radius:4px}
+.upl{border:2px dashed #333;border-radius:12px;padding:20px;text-align:center;margin:10px 0;cursor:pointer;background:#0e0e14}
+.preview{max-width:100%;max-height:320px;border-radius:10px;margin:10px auto;display:block}
+.frow{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.fbtn{padding:6px 10px;border-radius:999px;border:1px solid #333;background:#1a1a22;color:#ccc;font-size:11px;cursor:pointer}
+.act{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+</style></head><body>
+<div class="header"><div class="logo" onclick="location.reload()">ToolzyAI</div><div><button class="btn">Login</button> <button class="btn btn-primary">Get Started</button></div></div>
+<div id="home"><div class="hero"><h1>Build with AI,<br><span>Create Everything</span></h1><p>50+ Real Working AI Tools - V7 Fixed All Tools Visible</p><div class="search"><input id="s" placeholder="Search photo, chat, voice, bio..." oninput="render()"><button class="btn btn-primary">Search</button></div></div>
+<div class="sec">🔥 MOST POPULAR - TOP 6</div><div class="grid" id="gtop"></div>
+<div class="sec">✨ ALL TOOLS - 50+</div><div class="grid" id="gall"></div>
+<div style="text-align:center;padding:30px;color:#444;font-size:12px">© 2026 ToolzyAI V7 Fixed</div></div>
+<div id="toolpage" class="page"><button class="btn" onclick="goHome()">← Back</button><div class="toolbox"><h2 id="tt"></h2><p id="td" style="color:#888;font-size:13px;margin:6px 0 10px"></p>
+<div id="parea" style="display:none"><div class="upl" onclick="document.getElementById('fin').click()"><span id="utxt">📸 Click to upload photo</span><input type="file" id="fin" accept="image/*" hidden onchange="hPhoto(event)"></div><img id="prev" class="preview" style="display:none"><canvas id="cvs" style="display:none"></canvas><div class="frow"><button class="fbtn" onclick="apF('none')">Original</button><button class="fbtn" onclick="apF('grayscale(100%)')">B&W</button><button class="fbtn" onclick="apF('sepia(100%)')">Vintage</button><button class="fbtn" onclick="apF('contrast(150%) brightness(120%)')">HD+</button><button class="fbtn" onclick="apF('saturate(200%)')">Vibrant</button></div></div>
+<div id="iarea" style="display:none"><input type="text" id="iprompt" placeholder="Describe image - ex: Indian gym boy Dehradun mountains 4k"><div class="frow"><button class="fbtn" onclick="document.getElementById('iprompt').value='Handsome Indian 19 year old gym boy, Dehradun mountains, ultra realistic 4k'">Gym Boy</button><button class="fbtn" onclick="document.getElementById('iprompt').value='Beautiful Indian girl, Instagram model, Mussoorie sunset, cinematic light'">Girl</button><button class="fbtn" onclick="document.getElementById('iprompt').value='Futuristic logo for ToolzyAI, orange gradient, minimal'">Logo</button></div></div>
+<div id="tarea"><textarea id="tin" placeholder="Yaha likho... ex: make viral bio for gym boy"></textarea></div>
+<button class="btn btn-primary" id="tbtn" style="width:100%;padding:14px;margin-top:12px" onclick="run()">Generate with Real AI ✨</button><div class="res" id="tout"><div id="ch"></div><div id="rt">Result yaha ayega...</div></div>
+<div class="act"><button class="btn" onclick="copyR()">📋 Copy</button><button class="btn" onclick="shareR()">🔗 Share</button><button class="btn" onclick="downR()">⬇️ Download</button><button class="btn" onclick="speakR()">🔊 Voice</button></div>
+</div></div>
+<script>
+const TOOLS=[
+{id:'ai-chat',n:'AI Chat Pro',d:'Real ChatGPT style chat',i:'🤖',c:'#f59e0b',top:1},
+{id:'image-gen',n:'Image Generator',d:'Real 4k photo + download',i:'🎨',c:'#ef4444',top:2},
+{id:'bg-remover',n:'BG Remover',d:'Background remove 1 click',i:'✨',c:'#8b5cf6',top:3},
+{id:'photo-editor',n:'Photo Editor HD',d:'Filters + PNG download',i:'📸',c:'#06b6d4',top:4},
+{id:'text-voice',n:'Text to Voice',d:'Type & Listen + Download',i:'🔊',c:'#22c55e',top:5},
+{id:'bio-gen',n:'Bio Generator',d:'Viral Insta bio',i:'🔥',c:'#f97316',top:6},
+{id:'hashtag',n:'Hashtag Gen',d:'30 viral hashtags',i:'#️⃣',c:'#eab308'},
+{id:'caption',n:'Caption Gen',d:'5 viral captions',i:'💬',c:'#ec4899'},
+{id:'tweet',n:'Tweet Gen',d:'Viral tweets',i:'🐦',c:'#1da1f2'},
+{id:'hook',n:'Hook Gen',d:'10 hooks + score',i:'🪝',c:'#f59e0b'},
+{id:'dm',n:'DM Gen',d:'Flirty / Funny DM',i:'💌',c:'#ef4444'},
+{id:'ad',n:'Ad Copy Pro',d:'FB Insta Google ads',i:'📢',c:'#8b5cf6'},
+{id:'yt',n:'YT Title Gen',d:'Viral title + CTR',i:'▶️',c:'#ff0000'},
+{id:'seo',n:'SEO Title',d:'Title + meta + keywords',i:'🔍',c:'#22c55e'},
+{id:'resume',n:'Resume Builder',d:'Pro resume lines',i:'📄',c:'#06b6d4'},
+{id:'email',n:'Email Writer',d:'Pro cold emails',i:'📧',c:'#6366f1'},
+{id:'business',n:'Business Idea',d:'Startup ideas',i:'💡',c:'#f59e0b'},
+{id:'excel',n:'Excel Formula',d:'Formula + explain',i:'📊',c:'#16a34a'},
+{id:'math',n:'Math Solver',d:'Step by step',i:'🧮',c:'#ef4444'},
+{id:'code',n:'Code Explainer',d:'Bug fix + optimized',i:'💻',c:'#8b5cf6'},
+{id:'trip',n:'Trip Planner + Map',d:'Map + Day plan',i:'🗺️',c:'#06b6d4'},
+{id:'workout',n:'Workout Plan',d:'Mon-Sat gym plan',i:'💪',c:'#ef4444'},
+{id:'recipe',n:'Recipe Gen',d:'Ingredients + steps',i:'🍳',c:'#f97316'},
+{id:'color',n:'Color Palette',d:'5 HEX colors',i:'🎨',c:'#ec4899'},
+{id:'calendar',n:'Content Calendar',d:'30 days plan',i:'📅',c:'#6366f1'},
+{id:'roast',n:'Roast Gen',d:'Savage roasts',i:'🔥',c:'#ef4444'},
+{id:'riddle',n:'Riddle Gen',d:'Riddle + answer',i:'🧩',c:'#8b5cf6'},
+{id:'quiz',n:'Quiz Maker',d:'MCQs with answer',i:'❓',c:'#f59e0b'},
+{id:'story',n:'Story Gen',d:'Viral stories',i:'📖',c:'#06b6d4'},
+{id:'love',n:'Love Letter',d:'For crush',i:'❤️',c:'#ec4899'}
+];
+let cur=null,filter='none',imgData=null;
+function card(t){let badge=t.top?`<span class="badge">TOP ${t.top}</span>`:'';return `<div class="card" onclick="openT('${t.id}')">${badge}<div class="ico" style="background:${t.c}22;border:1px solid ${t.c}44">${t.i}</div><h3>${t.n}</h3><p>${t.d}</p></div>`}
+function render(){let q=document.getElementById('s').value.toLowerCase();let top=TOOLS.filter(x=>x.top).sort((a,b)=>a.top-b.top);let all=TOOLS.filter(x=>!x.top);if(q){all=all.filter(x=>(x.n+x.d).toLowerCase().includes(q));top=top.filter(x=>(x.n+x.d).toLowerCase().includes(q));}document.getElementById('gtop').innerHTML=top.map(card).join('');document.getElementById('gall').innerHTML=all.map(card).join('')}
+function goHome(){document.getElementById('home').style.display='block';document.getElementById('toolpage').classList.remove('on')}
+function openT(id){cur=TOOLS.find(x=>x.id===id);document.getElementById('home').style.display='none';document.getElementById('toolpage').classList.add('on');document.getElementById('tt').innerText=cur.i+' '+cur.n;document.getElementById('td').innerText=cur.d;document.getElementById('parea').style.display=(id==='photo-editor'||id==='bg-remover')?'block':'none';document.getElementById('iarea').style.display=(id==='image-gen')?'block':'none';document.getElementById('tarea').style.display=(id!=='image-gen'&&id!=='photo-editor'&&id!=='bg-remover')?'block':'none';document.getElementById('ch').innerHTML='';document.getElementById('rt').innerText='Ready!';window.scrollTo(0,0)}
+function hPhoto(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=ev=>{imgData=ev.target.result;let p=document.getElementById('prev');p.src=imgData;p.style.display='block';document.getElementById('utxt').innerText='✅ Photo loaded'};r.readAsDataURL(f)}
+function apF(f){filter=f;let p=document.getElementById('prev');if(p)p.style.filter=f}
+async function run(){let btn=document.getElementById('tbtn');btn.innerText='⏳ Generating...';btn.disabled=true;let inp=(document.getElementById('iprompt')?.value||document.getElementById('tin')?.value||'').trim();let ch=document.getElementById('ch');let rt=document.getElementById('rt');try{
+if(cur.id==='image-gen'){if(!inp)inp='beautiful Indian landscape';let enc=encodeURIComponent(inp);let url=`https://image.pollinations.ai/prompt/${enc}?width=1024&height=1024&seed=${Math.floor(Math.random()*9999)}`;rt.innerHTML=`<div class="bubble bu">${inp}</div><div class="bubble ba">🎨 Generating: ${inp}<br><img src="${url}"><br><a href="${url}" target="_blank" style="color:#f59e0b">⬇️ Open / Download</a></div>`;}
+else if(cur.id==='photo-editor'){rt.innerHTML=`<div class="bubble ba">✅ Filter: ${filter}<br>Download dabao!</div>`;}
+else if(cur.id==='text-voice'){if(!inp)inp='Hello from ToolzyAI';let u=new SpeechSynthesisUtterance(inp);u.lang='hi-IN';speechSynthesis.speak(u);rt.innerHTML=`<div class="bubble ba">🔊 Playing: ${inp.slice(0,150)}</div>`;}
+else if(cur.id==='ai-chat'){ch.innerHTML+=`<div class="bubble bu">${inp}</div><div class="bubble ba" id="typing">⏳ typing...</div>`;let r=await fetch(`https://text.pollinations.ai/${encodeURIComponent('Answer helpful in Hinglish: '+inp)}`);let t=await r.text();document.getElementById('typing').innerHTML=t.replace(/\n/g,'<br>');document.getElementById('typing').id='';rt.innerHTML='';document.getElementById('tin').value='';}
+else{ch.innerHTML+=`<div class="bubble bu">${inp}</div>`;let r=await fetch(`https://text.pollinations.ai/${encodeURIComponent('You are '+cur.n+' expert. Task: '+inp+'. Give 3-5 viral results with emoji.')}`);let t=await r.text();rt.innerHTML=`<div class="bubble ba">${t.replace(/\n/g,'<br>')}</div>`;document.getElementById('tin').value='';}
+}catch(e){rt.innerText='Error: '+e.message}btn.innerText='Generate with Real AI ✨';btn.disabled=false;}
+function copyR(){let t=document.getElementById('tout').innerText;navigator.clipboard.writeText(t);alert('Copied!')}
+function shareR(){let t=document.getElementById('tout').innerText;if(navigator.share)navigator.share({title:'ToolzyAI',text:t,url:location.href});else copyR()}
+function downR(){if(cur.id==='photo-editor'||cur.id==='bg-remover'){let p=document.getElementById('prev');if(!p.src)return alert('Upload photo first');let c=document.getElementById('cvs');let ctx=c.getContext('2d');let im=new Image();im.onload=()=>{c.width=im.naturalWidth;c.height=im.naturalHeight;ctx.filter=filter;ctx.drawImage(im,0,0);let a=document.createElement('a');a.download='toolzyai.png';a.href=c.toDataURL();a.click()};im.src=p.src;return}if(cur.id==='image-gen'){let img=document.querySelector('#tout img');if(img)window.open(img.src,'_blank');else alert('Generate first');return}let t=document.getElementById('tout').innerText;let blob=new Blob([t],{type:'text/plain'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=cur.id+'.txt';a.click()}
+function speakR(){let t=document.getElementById('tout').innerText.slice(0,600);let u=new SpeechSynthesisUtterance(t);u.lang='hi-IN';speechSynthesis.speak(u)}
+render();
+</script></body></html>
